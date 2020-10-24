@@ -3,57 +3,70 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 
-const Header = (props) => {
+const Header = ({prop}) => {
   return(
     <>
-    <h1>{props.name}</h1>
+    <h1>{prop.name}</h1>
     </>
   )
 }
 
-const Content = (props) => {
+const Content = ({prop}) => {
+  var Paras = prop.parts.map(part =>{
+    return(<p>{part.name} {part.exercises}</p>)
+  })
   return(
     <>
-    <p>
-      {props.part} {props.exercises}
-    </p>
+    {Paras}
     </>
   )
 }
 
 
-const Footer = (props) => {
+const Footer = ({prop}) => {
+  let total = 0
+  prop.parts.forEach(part => total += part.exercises)
+  console.log(total)
   return(
     <>
     <p>
-      Total number of exercises: {props.ex1 + props.ex2 + props.ex3}
+      Total number of exercises: {total}
     </p>
     </>
   )
 }
 
 const App = () => {
-  const course = 'Half Stack Application Development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const course = {
+    name: 'Half Stack Application Development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
+
 
   return(
     <div>
-      <Header name={course} />
+      <Header prop={course} />
 
       <hr></hr>
 
-      <Content part={part1} exercises={exercises1} />
-      <Content part={part2} exercises={exercises2} />
-      <Content part={part3} exercises={exercises3} />
+      <Content prop={course} />
 
       <hr></hr>
 
-      <Footer ex1={exercises1} ex2={exercises2} ex3={exercises3} />
+      <Footer prop={course} />
     </div>
   )
 }
