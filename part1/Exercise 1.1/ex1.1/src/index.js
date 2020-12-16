@@ -11,17 +11,35 @@ const Header = ({prop}) => {
   )
 }
 
-const Content = ({prop}) => {
-  var Paras = prop.parts.map(part =>{
-    return(<p>{part.name} {part.exercises}</p>)
-  })
+const Part = ({part}) => {
   return(
     <>
-    {Paras}
+    <p>{part.name} {part.exercises}</p>
     </>
   )
 }
 
+const Content = ({prop}) => {
+  return(
+    <div>
+    <Part part={prop.parts[0]}/>
+    <Part part={prop.parts[1]}/>
+    <Part part={prop.parts[2]}/>
+    </div>
+  )
+}
+
+
+// const Content = ({prop}) => {
+//   var Paras = prop.parts.map(part =>{
+//     return(<p>{part.name} {part.exercises}</p>)
+//   })
+//   return(
+//     <>
+//     {Paras}
+//     </>
+//   )
+// }
 
 const Footer = ({prop}) => {
   let total = 0
@@ -36,7 +54,29 @@ const Footer = ({prop}) => {
   )
 }
 
+const Hello = ({prop})  =>{
+
+  const bornYear = () =>{
+    const yearNow = new Date().getFullYear()
+    return yearNow - prop.age
+  }
+
+  return(
+    <div>
+      <p>
+        Hello {prop.name}, you are {prop.age} years old. 
+        So, you were probably born in {bornYear(prop.age)}.
+      </p>
+    </div>
+  )
+}
+
 const App = () => {
+  const jimmy = {
+    name: 'Jimmy',
+    age: 20
+  }
+
   const course = {
     name: 'Half Stack Application Development',
     parts: [
@@ -55,7 +95,6 @@ const App = () => {
     ]
   }
 
-
   return(
     <div>
       <Header prop={course} />
@@ -67,6 +106,10 @@ const App = () => {
       <hr></hr>
 
       <Footer prop={course} />
+
+      <hr></hr>
+
+      <Hello prop={jimmy} />
     </div>
   )
 }

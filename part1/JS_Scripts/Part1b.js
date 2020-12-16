@@ -17,3 +17,16 @@ const t3 = [1,2,3,4,5]
 const [first, second, ...rest] = t3
 
 console.log(first)
+console.log(rest)
+
+const object3 = {
+    name: {
+        first: 'Paul',
+        last: 'PJ'
+    },
+    grades: ['A', 'B', 'C', 'D'],
+    age: 27
+}
+
+console.log([object3.name.first + object3.name.last])
+console.log(object3['name']['first'])
